@@ -1,12 +1,21 @@
 import sqlite3
-import os
+from pathlib import Path
+
+
+# Pasta onde está este arquivo
+BASE_DIR = Path(__file__).resolve().parent
+
+# Pasta do banco
+DADOS_DIR = BASE_DIR / "dados"
+DADOS_DIR.mkdir(exist_ok=True)
+
+# Caminho completo do banco
+BANCO = DADOS_DIR / "compras.db"
 
 
 def conectar():
 
-    os.makedirs("dados", exist_ok=True)
-
-    return sqlite3.connect("dados/compras.db")
+    return sqlite3.connect(BANCO)
 
 
 def criar_banco():
@@ -15,12 +24,7 @@ def criar_banco():
 
     cursor = conn.cursor()
 
-    # ============================
-    # COMPRAS
-    # ============================
-
     cursor.execute("""
-
     CREATE TABLE IF NOT EXISTS compras(
 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,15 +50,9 @@ def criar_banco():
         arquivo_origem TEXT
 
     )
-
     """)
 
-    # ============================
-    # IMPORTAÇÕES
-    # ============================
-
     cursor.execute("""
-
     CREATE TABLE IF NOT EXISTS importacoes(
 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -66,16 +64,11 @@ def criar_banco():
         registros INTEGER
 
     )
-
     """)
 
     conn.commit()
-
     conn.close()
-
-    print("Banco criado com sucesso!")
 
 
 if __name__ == "__main__":
-
     criar_banco()

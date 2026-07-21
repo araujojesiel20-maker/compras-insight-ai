@@ -1,8 +1,11 @@
 import sqlite3
 from pathlib import Path
 
+# Pasta onde está este arquivo
+BASE_DIR = Path(__file__).resolve().parent
+
 # Banco de dados
-BANCO = Path("app/aprendizado.db")
+BANCO = BASE_DIR / "aprendizado.db"
 
 
 def conectar():
@@ -10,7 +13,6 @@ def conectar():
     conn = sqlite3.connect(BANCO)
 
     conn.execute("""
-
     CREATE TABLE IF NOT EXISTS mapeamentos(
 
         item_consumo TEXT PRIMARY KEY,
@@ -18,7 +20,6 @@ def conectar():
         item_compra TEXT
 
     )
-
     """)
 
     conn.commit()
@@ -33,19 +34,12 @@ def buscar(item):
     cursor = conn.cursor()
 
     cursor.execute(
-
         """
-
         SELECT item_compra
-
         FROM mapeamentos
-
         WHERE item_consumo = ?
-
         """,
-
         (item,)
-
     )
 
     resultado = cursor.fetchone()
@@ -53,7 +47,6 @@ def buscar(item):
     conn.close()
 
     if resultado:
-
         return resultado[0]
 
     return None
@@ -66,25 +59,15 @@ def salvar(item_consumo, item_compra):
     cursor = conn.cursor()
 
     cursor.execute(
-
         """
-
         INSERT OR REPLACE INTO mapeamentos
-
         VALUES(?,?)
-
         """,
-
         (
-
             item_consumo,
-
             item_compra
-
         )
-
     )
 
     conn.commit()
-
     conn.close()
