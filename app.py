@@ -29,7 +29,7 @@ st.set_page_config(
 # CSS
 # ======================================================
 
-css = Path("app/styles.css").read_text(encoding="utf-8")
+css = Path("styles.css").read_text(encoding="utf-8")
 
 st.markdown(
     f"<style>{css}</style>",
