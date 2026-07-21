@@ -44,19 +44,6 @@ if css_path.exists():
 # ======================================================
 
 mostrar_cabecalho()
-st.html("""
-<div style="
-background:#44498F;
-border-left:6px solid #E68A13;
-padding:20px;
-border-radius:18px;
-color:white;
-font-size:28px;
-font-weight:bold;
-">
-💰 TESTE HTML
-</div>
-""")
 
 st.divider()
 
