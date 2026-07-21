@@ -16,7 +16,7 @@ def mostrar_cabecalho():
 
             border-radius:18px;
 
-            padding:20px 28px;
+            padding:14px 24px;
 
             border-left:6px solid #E68A13;
 
@@ -30,7 +30,7 @@ def mostrar_cabecalho():
 
             color:white;
 
-            font-size:34px;
+            font-size:30px;
 
             font-weight:700;
 
@@ -109,14 +109,10 @@ def mostrar_cabecalho():
                 </div>
 
                 <div class="subtitulo">
-                    Laticínios Stefanello
-                </div>
-
-                <div class="descricao">
-                    Plataforma inteligente para análise de compras, consumo,
-                    estoque, indicadores financeiros e apoio à decisão.
+                    Laticinio Stefanello
                 </div>
                 """,
+
                 unsafe_allow_html=True
             )
 
