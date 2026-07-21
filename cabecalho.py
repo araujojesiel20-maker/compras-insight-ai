@@ -11,7 +11,7 @@ def mostrar_cabecalho():
     with col1:
 
         st.image(
-            "app/imagens/logo.png",
+            "imagens/logo.png",
             width=170
         )
 
