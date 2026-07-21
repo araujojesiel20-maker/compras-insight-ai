@@ -1,9 +1,12 @@
-import pandas as pd
 import math
+import re
+
+import pandas as pd
 from rapidfuzz import process
 
+
 # =====================================================
-# CARREGAR PLANILHA DE COMPRAS
+# CARREGAR PLANILHA
 # =====================================================
 
 def carregar_planilha(arquivo):
@@ -13,17 +16,18 @@ def carregar_planilha(arquivo):
         header=1
     )
 
-    # Remove colunas "Unnamed"
-    df = df.loc[:, ~df.columns.astype(str).str.contains("^Unnamed")]
+    df = df.loc[
+        :,
+        ~df.columns.astype(str).str.contains("^Unnamed")
+    ]
 
-    # Converte datas
     df["Data"] = pd.to_datetime(df["Data"])
 
     return df
 
 
 # =====================================================
-# FORMATAÇÃO DE MOEDA
+# MOEDA (INTELIGENTE)
 # =====================================================
 
 def formatar_moeda(valor):
@@ -32,6 +36,27 @@ def formatar_moeda(valor):
         return "R$ 0,00"
 
     valor = float(valor)
+
+    if abs(valor) >= 1_000_000_000:
+
+        return (
+            f"R$ {valor/1_000_000_000:.2f} Bi"
+            .replace(".", ",")
+        )
+
+    if abs(valor) >= 1_000_000:
+
+        return (
+            f"R$ {valor/1_000_000:.2f} Mi"
+            .replace(".", ",")
+        )
+
+    if abs(valor) >= 1_000:
+
+        return (
+            f"R$ {valor/1_000:.1f} mil"
+            .replace(".", ",")
+        )
 
     return (
         f"R$ {valor:,.2f}"
@@ -42,7 +67,7 @@ def formatar_moeda(valor):
 
 
 # =====================================================
-# FORMATAÇÃO DE NÚMEROS
+# NÚMEROS
 # =====================================================
 
 def formatar_numero(valor):
@@ -52,14 +77,25 @@ def formatar_numero(valor):
 
     valor = int(round(float(valor)))
 
-    return (
-        f"{valor:,}"
-        .replace(",", ".")
-    )
+    if abs(valor) >= 1_000_000:
+
+        return (
+            f"{valor/1_000_000:.1f} Mi"
+            .replace(".", ",")
+        )
+
+    if abs(valor) >= 1000:
+
+        return (
+            f"{valor/1000:.1f} mil"
+            .replace(".", ",")
+        )
+
+    return f"{valor}"
 
 
 # =====================================================
-# FORMATAÇÃO DE PERCENTUAL
+# PERCENTUAL
 # =====================================================
 
 def formatar_percentual(valor):
@@ -74,7 +110,7 @@ def formatar_percentual(valor):
 
 
 # =====================================================
-# FORMATAÇÃO DE DATA
+# DATA
 # =====================================================
 
 def formatar_data(data):
@@ -82,14 +118,14 @@ def formatar_data(data):
     if pd.isna(data):
         return ""
 
-    return pd.to_datetime(data).strftime("%d/%m/%Y")
+    return pd.to_datetime(
+        data
+    ).strftime("%d/%m/%Y")
 
-import re
 
-
-# ===============================================
-# NORMALIZA O NOME DOS PRODUTOS
-# ===============================================
+# =====================================================
+# NORMALIZAÇÃO
+# =====================================================
 
 def normalizar_item(texto):
 
@@ -100,24 +136,26 @@ def normalizar_item(texto):
 
     texto = texto.strip()
 
-    # Remove espaços duplicados
     texto = re.sub(r"\s+", " ", texto)
 
-    # Remove espaço antes/depois dos parênteses
     texto = texto.replace("( ", "(")
     texto = texto.replace(" )", ")")
 
-    # Padroniza unidades
     texto = texto.replace(" KG", "KG")
     texto = texto.replace(" G", "G")
     texto = texto.replace(" ML", "ML")
     texto = texto.replace(" L", "L")
 
-    # Remove espaços antes e depois das vírgulas
     texto = texto.replace(" ,", ",")
     texto = texto.replace(", ", ",")
 
     return texto
+
+
+# =====================================================
+# MATCH
+# =====================================================
+
 def localizar_item(nome, lista):
 
     resultado = process.extractOne(

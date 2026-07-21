@@ -2,20 +2,30 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 
-# ==========================================
-# PALETA DE CORES
-# ==========================================
-
 AZUL = "#34377A"
 LARANJA = "#E68A13"
 FUNDO = "#FFFFFF"
-GRADE = "#E8E8E8"
-TEXTO = "#2C2C2C"
+GRADE = "#ECECEC"
+TEXTO = "#303030"
 
 
-# ==========================================
-# LAYOUT PADRÃO
-# ==========================================
+# =====================================================
+# REDUZ NOMES MUITO GRANDES
+# =====================================================
+
+def reduzir(texto, tamanho=30):
+
+    texto = str(texto)
+
+    if len(texto) <= tamanho:
+        return texto
+
+    return texto[:tamanho] + "..."
+
+
+# =====================================================
+# LAYOUT
+# =====================================================
 
 def aplicar_layout(fig):
 
@@ -24,39 +34,38 @@ def aplicar_layout(fig):
         template="plotly_white",
 
         paper_bgcolor=FUNDO,
-
         plot_bgcolor=FUNDO,
 
         font=dict(
             family="Segoe UI",
-            size=13,
+            size=11,
             color=TEXTO
         ),
 
         title=dict(
             x=0.02,
             font=dict(
-                size=21,
+                size=18,
                 color=AZUL
             )
         ),
 
         legend=dict(
             orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1
+            y=-0.25,
+            x=0.5,
+            xanchor="center",
+            font=dict(size=10)
         ),
 
         margin=dict(
-            l=20,
-            r=20,
-            t=70,
-            b=20
+            l=60,
+            r=30,
+            t=60,
+            b=70
         ),
 
-        height=470
+        height=560
 
     )
 
@@ -74,9 +83,9 @@ def aplicar_layout(fig):
     return fig
 
 
-# ==========================================
-# DASHBOARD GRÁFICO
-# ==========================================
+# =====================================================
+# DASHBOARD
+# =====================================================
 
 def mostrar_graficos(df):
 
@@ -84,28 +93,23 @@ def mostrar_graficos(df):
 
     if df.empty:
 
-        st.warning("Nenhum dado encontrado para os filtros selecionados.")
+        st.warning("Nenhum dado encontrado.")
 
         return
 
     df = df.copy()
 
-    df["Data"] = pd.to_datetime(df["Data"], errors="coerce")
+    df["Data"] = pd.to_datetime(df["Data"])
 
-    df = df.dropna(subset=["Data"])
-
-    # =====================================================
-    # PRIMEIRA LINHA
-    # =====================================================
+    # --------------------------------------------------
 
     col1, col2 = st.columns(2)
 
     with col1:
 
         mensal = (
-            df.groupby(
-                df["Data"].dt.to_period("M")
-            )["Custo total"]
+            df.groupby(df["Data"].dt.to_period("M"))
+            ["Custo total"]
             .sum()
             .reset_index()
         )
@@ -116,20 +120,19 @@ def mostrar_graficos(df):
             mensal,
             x="Data",
             y="Custo total",
-            markers=True,
-            title="📈 Evolução das Compras"
+            title="📈 Evolução das Compras",
+            markers=True
         )
 
         fig.update_traces(
             line=dict(
                 color=LARANJA,
-                width=4
+                width=3
             ),
+
             marker=dict(
-                size=8
-            ),
-            fill="tozeroy",
-            fillcolor="rgba(230,138,19,.18)"
+                size=6
+            )
         )
 
         aplicar_layout(fig)
@@ -143,19 +146,26 @@ def mostrar_graficos(df):
     with col2:
 
         fornecedores = (
-            df.groupby("Fornecedor")["Custo total"]
+            df.groupby("Fornecedor")
+            ["Custo total"]
             .sum()
             .sort_values(ascending=False)
             .head(8)
             .reset_index()
         )
 
+        fornecedores["Fornecedor"] = fornecedores["Fornecedor"].apply(reduzir)
+
         fig = px.pie(
             fornecedores,
             names="Fornecedor",
             values="Custo total",
-            hole=0.68,
+            hole=.70,
             title="🍩 Participação dos Fornecedores"
+        )
+
+        fig.update_traces(
+            textfont_size=11
         )
 
         aplicar_layout(fig)
@@ -166,16 +176,15 @@ def mostrar_graficos(df):
             config={"displayModeBar": False}
         )
 
-    # =====================================================
-    # SEGUNDA LINHA
-    # =====================================================
+    # --------------------------------------------------
 
     col3, col4 = st.columns(2)
 
     with col3:
 
         produtos = (
-            df.groupby("Item")["Custo total"]
+            df.groupby("Item")
+            ["Custo total"]
             .sum()
             .sort_values(ascending=False)
             .head(10)
@@ -183,15 +192,16 @@ def mostrar_graficos(df):
             .reset_index()
         )
 
+        produtos["Item"] = produtos["Item"].apply(reduzir)
+
         fig = px.bar(
             produtos,
             x="Custo total",
             y="Item",
             orientation="h",
-            title="📦 Top 10 Produtos",
             color="Custo total",
-            color_continuous_scale="YlOrBr",
-            text_auto=".2s"
+            title="📦 Top Produtos",
+            color_continuous_scale="YlOrBr"
         )
 
         fig.update_layout(
@@ -209,7 +219,8 @@ def mostrar_graficos(df):
     with col4:
 
         fornecedores = (
-            df.groupby("Fornecedor")["Custo total"]
+            df.groupby("Fornecedor")
+            ["Custo total"]
             .sum()
             .sort_values(ascending=False)
             .head(10)
@@ -217,15 +228,16 @@ def mostrar_graficos(df):
             .reset_index()
         )
 
+        fornecedores["Fornecedor"] = fornecedores["Fornecedor"].apply(reduzir)
+
         fig = px.bar(
             fornecedores,
             x="Custo total",
             y="Fornecedor",
             orientation="h",
-            title="🏭 Top 10 Fornecedores",
             color="Custo total",
-            color_continuous_scale="Blues",
-            text_auto=".2s"
+            title="🏭 Top Fornecedores",
+            color_continuous_scale="Blues"
         )
 
         fig.update_layout(

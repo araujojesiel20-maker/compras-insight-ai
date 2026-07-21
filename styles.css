@@ -3,119 +3,90 @@
    Tema Stefanello
 ========================================================== */
 
-/* ==========================================================
-   APP
-========================================================== */
+/* ---------------------- APP ---------------------- */
 
 .stApp{
     background:#2B2F66;
 }
 
-/* ==========================================================
-   SIDEBAR
-========================================================== */
+/* Área principal */
+.block-container{
+    padding-top:1rem;
+    padding-bottom:2rem;
+    max-width:1700px;
+}
+
+/* ---------------------- SIDEBAR ---------------------- */
 
 section[data-testid="stSidebar"]{
-    background:#2B2F66;
+    background:#262A5B;
+    border-right:1px solid rgba(255,255,255,.08);
 }
 
 section[data-testid="stSidebar"] *{
-    color:white !important;
+    color:#FFF !important;
 }
 
-/* ==========================================================
-   TÍTULOS
-========================================================== */
+/* ---------------------- TÍTULOS ---------------------- */
 
 h1,h2,h3,h4,h5,h6{
-    color:white !important;
+    color:#FFF !important;
+    font-weight:700;
 }
 
-/* ==========================================================
-   TEXTO
-========================================================== */
+/* ---------------------- TEXTO ---------------------- */
 
 p,label,span{
-    color:white;
+    color:#FFF;
 }
 
-/* ==========================================================
-   DIVISORES
-========================================================== */
+/* ---------------------- DIVISORES ---------------------- */
 
 hr{
-    border:1px solid #E68A13;
+    border:1px solid rgba(230,138,19,.35);
 }
 
-/* ==========================================================
-   CARDS DE MÉTRICAS
-========================================================== */
+/* ---------------------- BOTÕES ---------------------- */
 
-div[data-testid="metric-container"]{
-
-    background:#44498F;
-
-    border-radius:15px;
-
-    border-left:6px solid #E68A13;
-
-    padding:18px;
-
-    box-shadow:0 6px 16px rgba(0,0,0,.25);
-
-}
-
-div[data-testid="metric-container"] label{
-
-    color:white !important;
-
-}
-
-div[data-testid="metric-container"] div{
-
-    color:white !important;
-
-}
-
-/* ==========================================================
-   BOTÕES
-========================================================== */
-
-.stButton>button{
+.stButton>button,
+.stDownloadButton>button{
 
     width:100%;
 
     background:#E68A13;
 
-    color:black;
+    color:#202020;
 
-    font-weight:bold;
+    font-weight:700;
 
     border:none;
 
     border-radius:10px;
 
-    transition:.3s;
+    transition:.25s;
 
+    min-height:44px;
 }
 
-.stButton>button:hover{
+.stButton>button:hover,
+.stDownloadButton>button:hover{
 
     background:#FFB347;
 
-    color:#34377A;
+    transform:translateY(-2px);
+
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
 
 }
 
-/* ==========================================================
-   TEXT INPUT
-========================================================== */
+/* ---------------------- INPUTS ---------------------- */
 
-.stTextInput input{
+.stTextInput input,
+.stDateInput input{
 
-    background:white !important;
+    background:#FFF !important;
 
-    color:black !important;
+    color:#111 !important;
 
     border-radius:10px;
 
@@ -123,127 +94,97 @@ div[data-testid="metric-container"] div{
 
 }
 
-.stTextInput input::placeholder{
+.stSelectbox div[data-baseweb="select"],
+.stMultiSelect div[data-baseweb="select"]{
 
-    color:#666;
-
-}
-
-/* ==========================================================
-   SELECTBOX
-========================================================== */
-
-.stSelectbox div[data-baseweb="select"]{
-
-    background:white !important;
+    background:#FFF !important;
 
     border-radius:10px;
 
 }
 
-.stSelectbox *{
-
-    color:black !important;
-
-}
-
-/* ==========================================================
-   MULTISELECT
-========================================================== */
-
-.stMultiSelect div[data-baseweb="select"]{
-
-    background:white !important;
-
-}
-
+.stSelectbox *,
 .stMultiSelect *{
 
-    color:black !important;
+    color:#111 !important;
 
 }
 
-/* ==========================================================
-   DATE INPUT
-========================================================== */
-
-.stDateInput input{
-
-    background:white !important;
-
-    color:black !important;
-
-}
-
-/* ==========================================================
-   DATAFRAME
-========================================================== */
+/* ---------------------- DATAFRAME ---------------------- */
 
 div[data-testid="stDataFrame"]{
 
-    border-radius:12px;
+    border-radius:14px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.20);
 
 }
 
-/* ==========================================================
-   FILE UPLOADER
-========================================================== */
+/* ---------------------- FILE UPLOADER ---------------------- */
 
 [data-testid="stFileUploader"]{
 
-    background:white;
+    background:#FFF;
 
     border:2px dashed #E68A13;
 
-    border-radius:15px;
+    border-radius:14px;
 
-    padding:15px;
+    padding:18px;
 
 }
 
 [data-testid="stFileUploader"] *{
 
-    color:black !important;
+    color:#111 !important;
 
 }
 
-/* ==========================================================
-   BOTÃO DO UPLOAD
-========================================================== */
+/* ---------------------- ALERTAS ---------------------- */
 
-[data-testid="stBaseButton-secondary"]{
+.element-container .stAlert{
 
-    background:#E68A13 !important;
-
-    color:black !important;
-
-    border:none !important;
-
-    border-radius:10px !important;
-
-    font-weight:bold !important;
+    border-radius:12px;
 
 }
 
-[data-testid="stBaseButton-secondary"]:hover{
+/* ---------------------- TABELAS ---------------------- */
 
-    background:#FFC857 !important;
+thead tr th{
 
-}
+    background:#34377A !important;
 
-/* ==========================================================
-   LINKS
-========================================================== */
-
-a{
-
-    color:#FFB347 !important;
+    color:#FFF !important;
 
 }
 
-/* ==========================================================
-   SCROLL
-========================================================== */
+tbody tr:nth-child(even){
+
+    background:#F7F7F7;
+
+}
+
+/* ---------------------- TABS ---------------------- */
+
+button[data-baseweb="tab"]{
+
+    font-weight:600;
+
+    border-radius:10px 10px 0 0;
+
+}
+
+/* ---------------------- EXPANDER ---------------------- */
+
+details{
+
+    border-radius:12px;
+
+}
+
+/* ---------------------- SCROLL ---------------------- */
 
 ::-webkit-scrollbar{
 
@@ -265,56 +206,30 @@ a{
 
 }
 
-/* ==========================================================
-   CARD DOS GRÁFICOS
-========================================================== */
+/* ---------------------- ANIMAÇÕES ---------------------- */
 
-.grafico-card{
+@keyframes subir{
 
-    background:white;
+    from{
 
-    border-radius:18px;
+        opacity:0;
 
-    padding:18px;
+        transform:translateY(12px);
 
-    margin-bottom:20px;
+    }
 
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
+    to{
 
-}
+        opacity:1;
 
-.grafico-card h3{
+        transform:translateY(0);
 
-    color:#34377A !important;
-
-    margin-top:0;
+    }
 
 }
 
-/* ==========================================================
-   INFO PERSONALIZADA
-========================================================== */
+.element-container{
 
-.element-container .stAlert{
-
-    border-radius:12px;
-
-}
-
-/* ==========================================================
-   TABELAS
-========================================================== */
-
-thead tr th{
-
-    background:#34377A !important;
-
-    color:white !important;
-
-}
-
-tbody tr:nth-child(even){
-
-    background:#f7f7f7;
+    animation:subir .35s ease;
 
 }
