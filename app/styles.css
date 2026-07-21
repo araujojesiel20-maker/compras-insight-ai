@@ -1,0 +1,342 @@
+/* ==========================================================
+   COMPRAS INSIGHT AI
+   TEMA STEFANELLO
+========================================================== */
+
+
+/* ==========================================================
+   CORES
+==========================================================
+
+Azul Escuro: #2B2F66
+Azul Médio : #34377A
+Azul Card  : #44498F
+Laranja    : #E68A13
+Laranja Hover: #FFB347
+
+========================================================== */
+
+
+/* ==========================================================
+   APP
+========================================================== */
+
+.stApp{
+    background:#2B2F66;
+    color:white;
+}
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+section[data-testid="stSidebar"]{
+    background:#2B2F66;
+}
+
+section[data-testid="stSidebar"] *{
+    color:white !important;
+}
+
+
+/* ==========================================================
+   TÍTULOS
+========================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    color:white !important;
+}
+
+
+/* ==========================================================
+   TEXTOS
+========================================================== */
+
+p,
+label{
+    color:white !important;
+}
+
+a{
+    color:#FFB347 !important;
+}
+
+
+/* ==========================================================
+   LINHA DIVISÓRIA
+========================================================== */
+
+hr{
+    border:1px solid #E68A13;
+}
+
+
+/* ==========================================================
+   MÉTRICAS
+========================================================== */
+
+div[data-testid="metric-container"]{
+
+    background:#44498F;
+
+    border-left:6px solid #E68A13;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    box-shadow:0 5px 15px rgba(255,255,255,.20);
+
+}
+
+div[data-testid="metric-container"] label{
+
+    color:white !important;
+
+}
+
+div[data-testid="metric-container"] div{
+
+    color:white !important;
+
+}
+
+
+/* ==========================================================
+   BOTÕES
+========================================================== */
+
+.stButton > button{
+
+    background:#E68A13;
+
+    color:black;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.stButton > button:hover{
+
+    background:#FFB347;
+
+    color:#34377A;
+
+}
+
+
+/* ==========================================================
+   INPUT DE TEXTO
+========================================================== */
+
+.stTextInput input{
+
+    background:white !important;
+
+    color:black !important;
+
+    border-radius:10px;
+
+    border:2px solid #E68A13;
+
+}
+
+.stTextInput input::placeholder{
+
+    color:#666 !important;
+
+}
+
+
+/* ==========================================================
+   SELECTBOX
+========================================================== */
+
+.stSelectbox div[data-baseweb="select"]{
+
+    background:white !important;
+
+    color:black !important;
+
+    border-radius:10px;
+
+    border:2px solid #E68A13;
+
+}
+
+.stSelectbox *{
+
+    color:black !important;
+
+}
+
+
+/* ==========================================================
+   MULTISELECT
+========================================================== */
+
+.stMultiSelect div[data-baseweb="select"]{
+
+    background:white !important;
+
+    border:2px solid #E68A13;
+
+    border-radius:10px;
+
+}
+
+.stMultiSelect *{
+
+    color:black !important;
+
+}
+
+
+/* ==========================================================
+   DATAFRAME
+========================================================== */
+
+div[data-testid="stDataFrame"]{
+
+    border-radius:12px;
+
+}
+
+
+/* ==========================================================
+   CARD DOS GRÁFICOS
+========================================================== */
+
+.grafico-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+}
+
+.grafico-card h3{
+
+    color:#34377A !important;
+
+    margin-top:0;
+
+}
+
+
+/* ==========================================================
+   UPLOAD
+========================================================== */
+
+[data-testid="stFileUploader"]{
+
+    background:white;
+
+    border:2px dashed #E68A13;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+}
+
+[data-testid="stFileUploaderDropzone"]{
+
+    background:transparent !important;
+
+    border:none !important;
+
+}
+
+[data-testid="stFileUploader"] label{
+
+    color:#34377A !important;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+[data-testid="stFileUploader"] small{
+
+    color:#666 !important;
+
+}
+
+[data-testid="stFileUploader"] span{
+
+    color:#34377A !important;
+
+    font-weight:600;
+
+}
+
+[data-testid="stBaseButton-secondary"]{
+
+    background:#E68A13 !important;
+
+    color:white !important;
+
+    border:none !important;
+
+    border-radius:10px !important;
+
+    font-weight:bold !important;
+
+    transition:.3s;
+
+}
+
+[data-testid="stBaseButton-secondary"]:hover{
+
+    background:#FFB347 !important;
+
+    color:#34377A !important;
+
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#E68A13;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#2B2F66;
+
+}
