@@ -1,4 +1,9 @@
 import pandas as pd
+from pathlib import Path
+from config import (
+    USAR_BASE_COMPARTILHADA,
+    CAMINHO_PLANILHA
+)
 
 
 def _limpar_dataframe(df):
@@ -22,7 +27,7 @@ def _limpar_dataframe(df):
     return df
 
 
-def carregar_base(upload):
+def carregar_base(upload=None):
     """
     Carrega a planilha principal do Compras Insight AI.
 
@@ -34,12 +39,30 @@ def carregar_base(upload):
         }
     """
 
-    if upload is None:
-        return None
+    # =====================================
+    # Origem da base
+    # =====================================
+
+    if USAR_BASE_COMPARTILHADA:
+
+        if not CAMINHO_PLANILHA.exists():
+
+            raise FileNotFoundError(
+                f"Não foi possível localizar a base:\n{CAMINHO_PLANILHA}"
+            )
+
+        origem = CAMINHO_PLANILHA
+
+    else:
+
+        if upload is None:
+            return None
+
+        origem = upload
 
     try:
 
-        arquivo = pd.ExcelFile(upload)
+        arquivo = pd.ExcelFile(origem)
 
         abas = arquivo.sheet_names
 

@@ -13,6 +13,7 @@ from prioridades import mostrar_prioridades
 from comparativo import mostrar_comparativo
 from matcher import preparar_dados
 from carregador import carregar_base
+from pedido_compra import mostrar_pedido_compra
 
 
 # ======================================================
@@ -232,6 +233,20 @@ with container_sugestao:
 
     mostrar_sugestao_compra(
         comparativo,
+        compras_filtradas
+    )
+
+# ======================================================
+# PEDIDO DE COMPRA
+# ======================================================
+
+st.divider()
+
+container_pedido = st.container()
+
+with container_pedido:
+
+    mostrar_pedido_compra(
         compras_filtradas
     )
 
